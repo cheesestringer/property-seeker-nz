@@ -7,7 +7,13 @@
   "scripts": {
     "start": "plasmo dev",
     "build": "plasmo build",
-    "package": "plasmo package"
+    "release": "npm run release-chromium&& npm run release-firefox",
+    "build-chromium": "plasmo build",
+    "package-chromium": "plasmo package",
+    "release-chromium": "npm run build-chromium&& npm run package-chromium",
+    "build-firefox": "plasmo build --target=firefox-mv3",
+    "package-firefox": "plasmo package --target=firefox-mv3",
+    "release-firefox": "npm run build-firefox&& npm run package-firefox"
   },
   "dependencies": {
     "plasmo": "^0.90.5",
@@ -23,5 +29,12 @@
     "@types/react-dom": "18.2.18",
     "prettier": "3.2.4",
     "typescript": "5.3.3"
+  },
+  "manifest": {
+    "browser_specific_settings": {
+      "gecko": {
+        "id": "$FIREFOX_EXTENSION_ID"
+      }
+    }
   }
 }
